@@ -10,7 +10,7 @@ const Header = () => {
         {/* Profile Image */}
         <div className="w-10 h-10 rounded-full overflow-hidden border">
           <Image
-            src="/portfolio.png"
+            src="/professional2.png"
             alt="Profile"
             width={40}
             height={40}
