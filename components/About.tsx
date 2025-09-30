@@ -32,7 +32,7 @@ const About = () => {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-white">
                       <Image
-                        src="/about.jpg"
+                        src="/heroImg.png"
                         alt="Atul Tiwari - App Developer"
                         fill
                         style={{ objectFit: "cover" }}
