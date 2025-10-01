@@ -242,7 +242,7 @@ const Projects = () => {
         <div className="text-center mt-12">
           <button
             onClick={() =>
-              window.open("https://github.com/yourusername", "_blank")
+              window.open("https://github.com/kajumac07", "_blank")
             }
             className="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors"
           >
