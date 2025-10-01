@@ -8,6 +8,8 @@ interface Project {
   description: string;
   icon: string;
   tags: string[];
+  link?: string;
+  linkType?: "web" | "playstore" | "github" | "demo";
 }
 
 const Projects = () => {
@@ -21,6 +23,8 @@ const Projects = () => {
         "A travel storytelling platform where users can share their journey experiences through blogs and stories.",
       icon: "🧳",
       tags: ["Next.js", "Flutter", "Firebase"],
+      link: "https://journey-junction-olive.vercel.app/",
+      linkType: "web",
     },
     {
       id: 2,
@@ -29,6 +33,8 @@ const Projects = () => {
         "Job application platform where users can upload resumes and admins can download them.",
       icon: "📄",
       tags: ["Next.js", "Firebase"],
+      link: "https://www.rozgaar.net/",
+      linkType: "web",
     },
     {
       id: 3,
@@ -37,22 +43,28 @@ const Projects = () => {
         "Emergency voice-call solution for accident victims with QR code emergency contacts.",
       icon: "🚨",
       tags: ["Next.js", "ZegoCloud", "Firebase"],
+      link: "https://www.familyalert.life/share/aS3xZ2CzZ5cxXdHnU523S7gksdG3-SqWoVhrk0Qlr56Z7bvj5",
+      linkType: "web",
     },
     {
       id: 4,
       title: "RabbitServices - Fleet Management",
       description:
-        "Fleet management solution for truck maintenance and repairs with real-time diagnostics.",
+        "Fleet management solution for truck maintenance and repairs with real-time diagnostics. User can find mechanics and User can create its Own team (Driver, Accountant, Mechanic, Co-Owner).and assign them different roles. User can track its vehicle in real-time.",
       icon: "🚛",
       tags: ["Flutter", "Firebase", "Next.js"],
+      link: "https://play.google.com/store/apps/details?id=com.rabbit_u_d_app.rabbit_services_app&pcampaignid=web_share",
+      linkType: "playstore",
     },
     {
       id: 5,
-      title: "WindayRoot - Real Estate Platform",
+      title: "WindayRoot - Electrical Services",
       description:
-        "Real estate platform connecting buyers with property owners and virtual tours.",
+        "On-demand electrical services app with real-time tracking and service history.",
       icon: "🏠",
       tags: ["Flutter", "Provider", "Firebase"],
+      link: "https://play.google.com/store/apps/details?id=com.windayroot.customer_app&pcampaignid=web_share",
+      linkType: "playstore",
     },
     {
       id: 6,
@@ -61,6 +73,34 @@ const Projects = () => {
         "Food delivery ecosystem with real-time order tracking and delivery optimization.",
       icon: "🍽️",
       tags: ["Flutter", "Getx", "REST APIs"],
+      link: "https://neartake.example.com/demo",
+      linkType: "demo",
+    },
+    {
+      id: 7,
+      title: "thankxbook",
+      description:
+        "User can buy and sell used books online with secure payment and reviews.",
+      icon: "🙏",
+      tags: ["Flutter", "Firebase"],
+      link: "https://play.google.com/store/apps/details?id=com.windayroot.library_app&pcampaignid=web_share",
+      linkType: "playstore",
+    },
+    {
+      id: 8,
+      title: "PikDop - Book a ride",
+      description:
+        "Ride-hailing app with real-time tracking, fare estimates, and driver ratings.",
+      icon: "🚗",
+      tags: [
+        "Flutter",
+        "Firebase",
+        "Google Maps",
+        "Cloud Functions",
+        "Push Notifications",
+      ],
+      link: "https://play.google.com/store/apps/details?id=com.pikdop_service.customer_app&pcampaignid=web_share",
+      linkType: "playstore",
     },
   ];
 
@@ -70,6 +110,44 @@ const Projects = () => {
     activeFilter === "All"
       ? projects
       : projects.filter((project) => project.tags.includes(activeFilter));
+
+  // Function to get link icon based on type
+  const getLinkIcon = (type: string) => {
+    switch (type) {
+      case "web":
+        return "🌐";
+      case "playstore":
+        return "📱";
+      case "github":
+        return "💻";
+      case "demo":
+        return "🚀";
+      default:
+        return "🔗";
+    }
+  };
+
+  // Function to get link text based on type
+  const getLinkText = (type: string) => {
+    switch (type) {
+      case "web":
+        return "Visit Website";
+      case "playstore":
+        return "View on Play Store";
+      case "github":
+        return "View Code";
+      case "demo":
+        return "Live Demo";
+      default:
+        return "View Project";
+    }
+  };
+
+  const handleProjectClick = (project: Project) => {
+    if (project.link) {
+      window.open(project.link, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <section id="projects" className="py-20 bg-white">
@@ -104,10 +182,27 @@ const Projects = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-500 transition-colors"
+              className={`bg-white border border-gray-200 rounded-lg p-6 transition-all ${
+                project.link
+                  ? "hover:border-blue-500 hover:shadow-md cursor-pointer"
+                  : "hover:border-gray-300"
+              }`}
+              onClick={() => project.link && handleProjectClick(project)}
             >
-              {/* Icon */}
-              <div className="text-3xl mb-4">{project.icon}</div>
+              {/* Icon and Link Badge */}
+              <div className="flex justify-between items-start mb-4">
+                <div className="text-3xl">{project.icon}</div>
+                {project.link && (
+                  <span className="text-sm bg-gray-100 text-gray-600 px-2 py-1 rounded-full flex items-center gap-1">
+                    <span>{getLinkIcon(project.linkType!)}</span>
+                    <span className="hidden sm:inline">
+                      {project.linkType === "playstore"
+                        ? "Android"
+                        : project.linkType}
+                    </span>
+                  </span>
+                )}
+              </div>
 
               {/* Title */}
               <h3 className="text-lg font-semibold text-black mb-3">
@@ -120,7 +215,7 @@ const Projects = () => {
               </p>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag, index) => (
                   <span
                     key={index}
@@ -130,13 +225,27 @@ const Projects = () => {
                   </span>
                 ))}
               </div>
+
+              {/* Link Button */}
+              {project.link && (
+                <div className="flex items-center gap-2 text-sm text-blue-600 font-medium mt-4 pt-4 border-t border-gray-100">
+                  <span>{getLinkIcon(project.linkType!)}</span>
+                  <span>{getLinkText(project.linkType!)}</span>
+                  <span>→</span>
+                </div>
+              )}
             </div>
           ))}
         </div>
 
         {/* Simple CTA */}
         <div className="text-center mt-12">
-          <button className="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+          <button
+            onClick={() =>
+              window.open("https://github.com/yourusername", "_blank")
+            }
+            className="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          >
             View More Projects
           </button>
         </div>
