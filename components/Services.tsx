@@ -115,44 +115,6 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Stats Bar */}
-        <div className="bg-gray-50 rounded-2xl p-8 mb-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="group">
-              <div className="text-3xl font-bold text-black mb-2 group-hover:scale-110 transition-transform duration-300">
-                50+
-              </div>
-              <div className="text-gray-600 text-sm font-medium">
-                Projects Completed
-              </div>
-            </div>
-            <div className="group">
-              <div className="text-3xl font-bold text-black mb-2 group-hover:scale-110 transition-transform duration-300">
-                30+
-              </div>
-              <div className="text-gray-600 text-sm font-medium">
-                Happy Clients
-              </div>
-            </div>
-            <div className="group">
-              <div className="text-3xl font-bold text-black mb-2 group-hover:scale-110 transition-transform duration-300">
-                4+
-              </div>
-              <div className="text-gray-600 text-sm font-medium">
-                Years Experience
-              </div>
-            </div>
-            <div className="group">
-              <div className="text-3xl font-bold text-black mb-2 group-hover:scale-110 transition-transform duration-300">
-                99%
-              </div>
-              <div className="text-gray-600 text-sm font-medium">
-                Client Satisfaction
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* CTA Section */}
         <div className="text-center">
           <div className="bg-black rounded-2xl p-12 text-white max-w-4xl mx-auto">
