@@ -2,14 +2,18 @@
 
 import React, { useState } from "react";
 
+interface ProjectLink {
+  type: "web" | "playstore" | "appstore" | "github" | "demo";
+  url: string;
+}
+
 interface Project {
   id: number;
   title: string;
   description: string;
   icon: string;
   tags: string[];
-  link?: string;
-  linkType?: "web" | "playstore" | "github" | "demo";
+  links?: ProjectLink[];
 }
 
 const Projects = () => {
@@ -23,8 +27,12 @@ const Projects = () => {
         "A travel storytelling platform where users can share their journey experiences through blogs and stories.",
       icon: "🧳",
       tags: ["Next.js", "Flutter", "Firebase"],
-      link: "https://journey-junction-olive.vercel.app/",
-      linkType: "web",
+      links: [
+        {
+          type: "web",
+          url: "https://journey-junction-olive.vercel.app/",
+        },
+      ],
     },
     {
       id: 2,
@@ -33,8 +41,12 @@ const Projects = () => {
         "Job application platform where users can upload resumes and admins can download them.",
       icon: "📄",
       tags: ["Next.js", "Firebase"],
-      link: "https://www.rozgaar.net/",
-      linkType: "web",
+      links: [
+        {
+          type: "web",
+          url: "https://www.rozgaar.net/",
+        },
+      ],
     },
     {
       id: 3,
@@ -43,8 +55,12 @@ const Projects = () => {
         "Emergency voice-call solution for accident victims with QR code emergency contacts.",
       icon: "🚨",
       tags: ["Next.js", "ZegoCloud", "Firebase"],
-      link: "https://www.familyalert.life/share/aS3xZ2CzZ5cxXdHnU523S7gksdG3-SqWoVhrk0Qlr56Z7bvj5",
-      linkType: "web",
+      links: [
+        {
+          type: "web",
+          url: "https://www.familyalert.life/share/aS3xZ2CzZ5cxXdHnU523S7gksdG3-SqWoVhrk0Qlr56Z7bvj5",
+        },
+      ],
     },
     {
       id: 4,
@@ -53,8 +69,20 @@ const Projects = () => {
         "Fleet management solution for truck maintenance and repairs with real-time diagnostics. User can find mechanics and User can create its Own team (Driver, Accountant, Mechanic, Co-Owner).and assign them different roles. User can track its vehicle in real-time.",
       icon: "🚛",
       tags: ["Flutter", "Firebase", "Next.js"],
-      link: "https://play.google.com/store/apps/details?id=com.rabbit_u_d_app.rabbit_services_app&pcampaignid=web_share",
-      linkType: "playstore",
+      links: [
+        {
+          type: "playstore",
+          url: "https://play.google.com/store/apps/details?id=com.rabbit_u_d_app.rabbit_services_app&pcampaignid=web_share",
+        },
+        {
+          type: "appstore",
+          url: "https://apps.apple.com/us/app/rabbit-mechanic-service/id6739995003",
+        },
+        {
+          type: "web",
+          url: "https://www.rabbitmechanic.com/",
+        },
+      ],
     },
     {
       id: 5,
@@ -63,8 +91,16 @@ const Projects = () => {
         "On-demand electrical services app with real-time tracking and service history.",
       icon: "🏠",
       tags: ["Flutter", "Provider", "Firebase"],
-      link: "https://play.google.com/store/apps/details?id=com.windayroot.customer_app&pcampaignid=web_share",
-      linkType: "playstore",
+      links: [
+        {
+          type: "playstore",
+          url: "https://play.google.com/store/apps/details?id=com.windayroot.customer_app&pcampaignid=web_share",
+        },
+        // {
+        //   type: "appstore",
+        //   url: "https://apps.apple.com/us/app/windayroot/id6479606468",
+        // },
+      ],
     },
     {
       id: 6,
@@ -73,8 +109,12 @@ const Projects = () => {
         "Food delivery ecosystem with real-time order tracking and delivery optimization.",
       icon: "🍽️",
       tags: ["Flutter", "Getx", "REST APIs"],
-      link: "https://neartake.example.com/demo",
-      linkType: "demo",
+      links: [
+        {
+          type: "demo",
+          url: "https://github.com/atultiwari7388/project_near_take",
+        },
+      ],
     },
     {
       id: 7,
@@ -83,8 +123,12 @@ const Projects = () => {
         "User can buy and sell used books online with secure payment and reviews.",
       icon: "🙏",
       tags: ["Flutter", "Firebase"],
-      link: "https://play.google.com/store/apps/details?id=com.windayroot.library_app&pcampaignid=web_share",
-      linkType: "playstore",
+      links: [
+        {
+          type: "playstore",
+          url: "https://play.google.com/store/apps/details?id=com.windayroot.library_app&pcampaignid=web_share",
+        },
+      ],
     },
     {
       id: 8,
@@ -99,8 +143,16 @@ const Projects = () => {
         "Cloud Functions",
         "Push Notifications",
       ],
-      link: "https://play.google.com/store/apps/details?id=com.pikdop_service.customer_app&pcampaignid=web_share",
-      linkType: "playstore",
+      links: [
+        {
+          type: "playstore",
+          url: "https://play.google.com/store/apps/details?id=com.pikdop_service.customer_app&pcampaignid=web_share",
+        },
+        // {
+        //   type: "appstore",
+        //   url: "https://apps.apple.com/us/app/pikdop/id6479612467",
+        // },
+      ],
     },
   ];
 
@@ -117,7 +169,9 @@ const Projects = () => {
       case "web":
         return "🌐";
       case "playstore":
-        return "📱";
+        return "🤖";
+      case "appstore":
+        return "🍎";
       case "github":
         return "💻";
       case "demo":
@@ -131,22 +185,31 @@ const Projects = () => {
   const getLinkText = (type: string) => {
     switch (type) {
       case "web":
-        return "Visit Website";
+        return "Website";
       case "playstore":
-        return "View on Play Store";
+        return "Android";
+      case "appstore":
+        return "iOS";
       case "github":
-        return "View Code";
+        return "Code";
       case "demo":
-        return "Live Demo";
+        return "Demo";
       default:
-        return "View Project";
+        return "View";
     }
   };
 
+  const handleLinkClick = (url: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   const handleProjectClick = (project: Project) => {
-    if (project.link) {
-      window.open(project.link, "_blank", "noopener,noreferrer");
+    // If project has only one link, open it directly
+    if (project.links && project.links.length === 1) {
+      window.open(project.links[0].url, "_blank", "noopener,noreferrer");
     }
+    // If multiple links, don't do anything on card click - let user choose
   };
 
   return (
@@ -183,24 +246,35 @@ const Projects = () => {
             <div
               key={project.id}
               className={`bg-white border border-gray-200 rounded-lg p-6 transition-all ${
-                project.link
+                project.links && project.links.length > 0
                   ? "hover:border-blue-500 hover:shadow-md cursor-pointer"
                   : "hover:border-gray-300"
               }`}
-              onClick={() => project.link && handleProjectClick(project)}
+              onClick={() => project.links && handleProjectClick(project)}
             >
-              {/* Icon and Link Badge */}
+              {/* Icon and Links Badge */}
               <div className="flex justify-between items-start mb-4">
                 <div className="text-3xl">{project.icon}</div>
-                {project.link && (
-                  <span className="text-sm bg-gray-100 text-gray-600 px-2 py-1 rounded-full flex items-center gap-1">
-                    <span>{getLinkIcon(project.linkType!)}</span>
-                    <span className="hidden sm:inline">
-                      {project.linkType === "playstore"
-                        ? "Android"
-                        : project.linkType}
-                    </span>
-                  </span>
+                {project.links && project.links.length > 0 && (
+                  <div className="flex gap-1 flex-wrap justify-end">
+                    {project.links.slice(0, 3).map((link, index) => (
+                      <span
+                        key={index}
+                        className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full flex items-center gap-1"
+                        title={getLinkText(link.type)}
+                      >
+                        <span>{getLinkIcon(link.type)}</span>
+                        <span className="hidden sm:inline">
+                          {getLinkText(link.type)}
+                        </span>
+                      </span>
+                    ))}
+                    {project.links.length > 3 && (
+                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                        +{project.links.length - 3}
+                      </span>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -226,12 +300,19 @@ const Projects = () => {
                 ))}
               </div>
 
-              {/* Link Button */}
-              {project.link && (
-                <div className="flex items-center gap-2 text-sm text-blue-600 font-medium mt-4 pt-4 border-t border-gray-100">
-                  <span>{getLinkIcon(project.linkType!)}</span>
-                  <span>{getLinkText(project.linkType!)}</span>
-                  <span>→</span>
+              {/* Links */}
+              {project.links && project.links.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-100">
+                  {project.links.map((link, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => handleLinkClick(link.url, e)}
+                      className="flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg hover:bg-gray-200 transition-colors"
+                    >
+                      <span>{getLinkIcon(link.type)}</span>
+                      <span>{getLinkText(link.type)}</span>
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
